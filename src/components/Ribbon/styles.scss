@@ -1,0 +1,40 @@
+.ribbon {
+  width: auto;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 1em;
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    bottom: -12px;
+    border: 20.5px solid #3e7cc3;
+    z-index: 1;
+  }
+
+  &:before {
+    left: -60px;
+    border-right-width: 50px;
+    border-left-color: transparent;
+  }
+
+  &:after {
+    right: -60px;
+    border-left-width: 50px;
+    border-right-color: transparent;
+  }
+
+  h2 {
+    background-color: #468ee5;
+    font-size: 1em;
+    color: #ffffff;
+    margin: 0;
+    padding: 12px 27px;
+    position: relative;
+    z-index: 2;
+    font-weight: 100;
+  }
+}

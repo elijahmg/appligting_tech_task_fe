@@ -1,0 +1,60 @@
+.fieldButtonContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.textFieldSpanContainer {
+  display: flex;
+  flex-direction: column;
+  margin: 0 10px;
+  height: 60px;
+  width: 100%;
+}
+
+.buttonWrap {
+  margin: 0 10px;
+}
+
+span {
+  margin: 0 0 10px 0;
+  font-style: italic;
+}
+
+header {
+  background-color: #468ee5;
+  text-align: center;
+}
+
+.headerText {
+  color: white;
+  font-size: 20px;
+}
+
+h1 {
+  margin: 0;
+}
+
+.headerMessageContainer {
+  font-style: italic;
+  text-align: center;
+}
+
+.message {
+  display: inline-block;
+  margin: 36px 0;
+  text-align: left;
+}
+
+.message>div {
+  display: inline-block;
+  width: 100%;
+  margin-top: 1em;
+  text-align: right;
+}
+
+.ribbonContainer {
+  min-height: 58px;
+  position: relative;
+}
