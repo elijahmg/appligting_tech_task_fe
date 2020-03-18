@@ -1,24 +1,22 @@
 import React, { FC, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 
 import { TextField } from '../../components/TextField';
 import { Button } from '../../components/Button';
-
-import styles from './styles.scss';
 import { Container } from '../../components/Container';
 import { Ribbon } from '../../components/Ribbon';
 import { Table } from '../../components/Table';
+import { loadLeaderBoard } from '../../api/get';
 
-const dummy = [
-  { id: 1, teamName: 'Team Name', clicks: '10 020' },
-  { id: 2, teamName: 'Team Name', clicks: '10 020' },
-  { id: 3, teamName: 'Team Name', clicks: '10 020' },
-  { id: 4, teamName: 'Team Name', clicks: '10 020' },
-  { id: 5, teamName: 'Team Name', clicks: '10 020' }
-];
+import styles from './styles.scss';
 
 export const HomePage: FC = () => {
   const [text, setText] = useState('');
   const [count, setCount] = useState(0);
+  const { teamName } = useParams();
+
+  const leaderBoardData = loadLeaderBoard();
 
   return (
     <div>
@@ -49,8 +47,12 @@ export const HomePage: FC = () => {
         <div className={styles.ribbonContainer}>
           <Ribbon label="TOP 10 Clickers"/>
         </div>
-        <Table data={dummy}/>
+        {!leaderBoardData && <div>Loading</div>}
+        {leaderBoardData && <Table data={leaderBoardData}/>}
       </Container>
+      <footer>
+        If you don't like this page, it's <a href="https://applifting.cz">Applifting</a>'s fault
+      </footer>
     </div>
   );
 };

@@ -3,8 +3,8 @@ import React, { FC } from 'react';
 import './styles.scss';
 
 interface Data {
-  id: number,
-  teamName: string,
+  order: number,
+  team: string,
   clicks: string
 }
 
@@ -25,8 +25,8 @@ export const Table: FC<Props> = ({ data }) => {
       <tbody>
       {data.map((obj, index) => (
         <tr key={index}>
-          <td>{obj.id}</td>
-          <td>{obj.teamName}</td>
+          <td>{obj.order}</td>
+          <td>{obj.team}</td>
           <td>{obj.clicks}</td>
         </tr>
       ))}
