@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 
 import './styles.scss';
 
-interface Data {
+export interface LeaderBoardData {
   order: number,
   team: string,
   clicks: string
 }
 
 type Props = {
-  data: Array<Data>,
+  data: Array<LeaderBoardData>,
 }
 
 export const Table: FC<Props> = ({ data }) => {

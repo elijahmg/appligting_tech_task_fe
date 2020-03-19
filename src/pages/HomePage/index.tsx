@@ -1,7 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import { loadLeaderBoard } from '../../api/get';
+
+import { initializeSession } from '../../store/actions/session';
+import { Session } from '../../store/types/session';
 
 import { TextField } from '../../components/TextField';
 import { Button } from '../../components/Button';
@@ -13,25 +17,38 @@ import { TeamInfo } from '../../components/TeamInfo';
 import { HeaderMessage } from '../../components/HeaderMessage';
 
 import styles from './styles.scss';
+import { submitClick } from '../../api/post';
 
-export const HomePage: FC = () => {
-  const [text, setText] = useState('');
-  const [count, setCount] = useState(0);
+type Props = {
+  setSession: Function,
+  session: string,
+}
 
+const HomePage: FC<Props> = ({ setSession, session }) => {
+  const [teamNameValue, setTeamNameValue] = useState('');
+  const [response, setResponse] = useState({});
+  const [leaderBoardData, setLeaderBoardData] = useState([]);
   const { teamName } = useParams();
   const history = useHistory();
 
-  const leaderBoardData = loadLeaderBoard();
+  useEffect(() => {
+    const loadData = async () => {
+      const leaderBoardData = await loadLeaderBoard();
+      setLeaderBoardData(leaderBoardData.slice(0, 10));
+    };
 
-  const handleOnClick = () => {
-    if (text && !teamName) {
-      history.push(`/${text}`);
-      return;
+    loadData();
+    setSession();
+  }, []);
+
+  const handleOnClick = async () => {
+    if (teamNameValue && !teamName) {
+      history.push(`/${teamNameValue}`);
     }
 
-    if (teamName) {
-      setCount(count + 1);
-    }
+    const response = await submitClick(teamName, session);
+
+    setResponse(response);
   };
 
   return (
@@ -49,8 +66,8 @@ export const HomePage: FC = () => {
           <div className={styles.textFieldSpanContainer}>
             <span className={styles.span}>Enter your team name</span>
             <TextField
-              onChange={(e) => setText(e.target.value)}
-              value={text}
+              onChange={(e) => setTeamNameValue(e.target.value)}
+              value={teamNameValue}
               placeholder="Your mom"
             />
           </div>
@@ -71,3 +88,13 @@ export const HomePage: FC = () => {
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch: any) => ({
+  setSession: () => dispatch(initializeSession())
+});
+
+const mapStateToProps = (state: Session) => ({
+  session: state.session,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

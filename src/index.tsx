@@ -1,8 +1,11 @@
 import React, { FC } from 'react';
 import ReactDOM from 'react-dom';
 import { Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+
 import { createBrowserHistory } from 'history';
 
+import { store } from './store/store';
 import { Routes } from './routes';
 
 import './index.scss';
@@ -10,9 +13,11 @@ import './index.scss';
 const history = createBrowserHistory();
 
 const App: FC = () => (
-  <Router history={history}>
-    <Routes/>
-  </Router>
+  <Provider store={store}>
+    <Router history={history}>
+      <Routes/>
+    </Router>
+  </Provider>
 );
 
 ReactDOM.render(<App/>, document.getElementById('root'));
