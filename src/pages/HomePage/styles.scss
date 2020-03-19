@@ -15,6 +15,7 @@
 
 .buttonWrap {
   margin: 0 10px;
+  width: 100%;
 }
 
 span {
@@ -43,14 +44,11 @@ h1 {
 }
 
 .headerMessageContainer {
-  font-style: italic;
   text-align: center;
-}
-
-.message {
-  display: inline-block;
-  margin: 36px 0;
-  text-align: left;
+  min-height: 125px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .message>div {
