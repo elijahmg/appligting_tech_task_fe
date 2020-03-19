@@ -50,6 +50,6 @@
   "scripts": {
     "dev": "webpack-dev-server --config webpack.common.js --progress --color",
     "start": "node server.js",
-    "heroku-postbuild": "webpack -p"
+    "heroku-postbuild": "webpack --config webpack.common.js"
   }
 }
