@@ -7,17 +7,13 @@ module.exports = {
   entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/',
   },
   mode: 'production',
   devtool: false,
   resolve: {
     extensions: ['.js', '.ts', '.tsx']
-  },
-  devServer: {
-    port: 3000,
-    contentBase: './',
-    historyApiFallback: true
   },
   module: {
     rules: [
