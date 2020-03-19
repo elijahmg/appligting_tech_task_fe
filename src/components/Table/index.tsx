@@ -19,7 +19,6 @@ type Props = {
  * @constructor
  */
 export const Table: FC<Props> = ({ data }) => {
-  console.log(data);
   return (
     <table>
       <thead>

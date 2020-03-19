@@ -70,11 +70,13 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
   }, [session]);
 
   const onClickHandler = async () => {
-    if (session && (teamName || teamNameValue)) {
-      const response = await submitClick(teamName || teamNameValue, session);
+    const team = teamName || teamNameValue;
+
+    if (session && team) {
+      const response = await submitClick(team, session);
 
       /** Find index for slicing leader board data to display team place in a table **/
-      const teamIndex = findIndex(response.leaderBoarData, (obj: LeaderBoardData) => obj.team === teamName);
+      const teamIndex = findIndex(response.leaderBoarData, (obj: LeaderBoardData) => obj.team === team);
 
       /** Set active: true, to emphasize row in the table **/
       response.leaderBoarData[teamIndex] = { ...response.leaderBoarData[teamIndex], active: true };
