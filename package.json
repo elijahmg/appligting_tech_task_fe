@@ -1,6 +1,8 @@
 {
   "name": "applifting_tech_task_fe",
   "version": "1.0.0",
+  "license": "MIT",
+  "main": "src/index.tsx",
   "dependencies": {
     "@types/history": "^4.7.5",
     "@types/lodash": "^4.14.149",
