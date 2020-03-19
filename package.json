@@ -42,6 +42,7 @@
     "webpack-dev-server": "^3.10.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack.common.js --progress --color"
+    "start": "webpack-dev-server --config webpack.common.js --progress --color",
+    "build": "webpack --config webpack.common.js"
   }
 }
