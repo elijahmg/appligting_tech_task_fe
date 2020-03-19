@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { connect } from 'react-redux';
+// @ts-ignore
 import { findIndex } from 'lodash';
 
 import { loadLeaderBoard } from '../../api/get';
@@ -20,8 +21,11 @@ import { Loading } from '../../components/Loading';
 import { TeamInfo } from '../../components/TeamInfo';
 import { HeaderMessage } from '../../components/HeaderMessage';
 import { ClickInfo } from '../../components/ClickInfo';
+import { Footer } from '../../components/Footer';
+import { Header } from '../../components/Header';
 
 import styles from './styles.scss';
+
 
 type Props = {
   setSession: Function,
@@ -44,29 +48,35 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
   const { teamName } = useParams();
   const history = useHistory();
 
+  /** Initial call during loading page **/
   useEffect(() => {
     const loadData = async () => {
       const leaderBoardData = await loadLeaderBoard();
-      setLeaderBoardData(
-        leaderBoardData.slice(0, 10)
-          .map((obj: LeaderBoardData) => ({ ...obj, clicks: formatNumber(obj.clicks)})),
-        );
+      const mutatedLeaderBoardData = leaderBoardData.slice(0, 10)
+          .map((obj: LeaderBoardData) => ({ ...obj, clicks: formatNumber(obj.clicks)}));
+
+      setLeaderBoardData(mutatedLeaderBoardData);
     };
 
+    /** Set session into redux store **/
     setSession();
 
     loadData();
   }, []);
 
+  /** Initial call on click handler in case of existing team name **/
   useEffect(() => {
-    initialClick();
+    onClickHandler();
   }, [session]);
 
-  const initialClick = async () => {
+  const onClickHandler = async () => {
     if (session && (teamName || teamNameValue)) {
       const response = await submitClick(teamName || teamNameValue, session);
 
-      const teamIndex = findIndex(response.leaderBoarData, (obj) => obj.team === teamName);
+      /** Find index for slicing leader board data to display team place in a table **/
+      const teamIndex = findIndex(response.leaderBoarData, (obj: LeaderBoardData) => obj.team === teamName);
+
+      /** Set active: true, to emphasize row in the table **/
       response.leaderBoarData[teamIndex] = { ...response.leaderBoarData[teamIndex], active: true };
       let data = [];
 
@@ -83,19 +93,18 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
     }
   };
 
+  /** On button click handler **/
   const handleOnClick = async () => {
     if (teamNameValue && !teamName) {
       history.push(`/${teamNameValue}`);
     }
 
-    await initialClick();
+    await onClickHandler();
   };
 
   return (
     <div>
-      <header>
-        <h1 className={styles.headerText}>STFUANDCLICK.COM</h1>
-      </header>
+      <Header/>
       <div className={styles.headerMessageContainer}>
         {!teamName && <HeaderMessage/>}
         {teamName && <TeamInfo/>}
@@ -130,9 +139,7 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
           <span>Want to be top? STFU and click</span>
         </div>
       </Container>
-      <footer>
-        If you don't like this page, it's <a href="https://applifting.cz">Applifting</a>'s fault
-      </footer>
+      <Footer/>
     </div>
   );
 };

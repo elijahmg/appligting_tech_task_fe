@@ -8,6 +8,13 @@ type Props = {
   value?: any,
 }
 
+/**
+ * Text field component
+ * @param {(event: ChangeEvent<HTMLInputElement>) => void} onChange
+ * @param {any} value
+ * @param {string} placeholder
+ * @constructor
+ */
 export const TextField: FC<Props> = ({ onChange, value, placeholder }) => {
   return (
     <input

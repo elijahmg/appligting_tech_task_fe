@@ -12,6 +12,10 @@ import './index.scss';
 
 const history = createBrowserHistory();
 
+/**
+ * Init app
+ * @constructor
+ */
 const App: FC = () => (
   <Provider store={store}>
     <Router history={history}>

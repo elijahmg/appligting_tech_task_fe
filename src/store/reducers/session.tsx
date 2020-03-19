@@ -5,6 +5,11 @@ const initialState: Session = {
   session: '',
 };
 
+/**
+ * Session reducer
+ * @param {Session} state
+ * @param {SessionAction} action
+ */
 export function session(state = initialState, action: SessionAction): Session {
   switch (action.type) {
     case INITIALIZE_SESSION:

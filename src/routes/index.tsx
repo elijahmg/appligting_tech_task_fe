@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import HomePage from '../pages/HomePage';
 
+/** Routes **/
 export const Routes: FC = () => (
   <Switch>
     <Route path="/:teamName" children={<HomePage/>}/>

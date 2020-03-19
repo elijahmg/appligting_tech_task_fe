@@ -12,6 +12,14 @@ export interface Response {
   leaderBoarData: Array<LeaderBoardData>
 }
 
+/**
+ * Submit button click
+ *
+ * for reviewers: It can be written in more common way
+ * divide POST call as function, and then use it here
+ * however for this type of task
+ * this solution is enough
+ */
 export const submitClick = async (teamName: string | undefined, session: string) => {
   const dataToSend = {
     team: teamName,
@@ -26,6 +34,7 @@ export const submitClick = async (teamName: string | undefined, session: string)
     leaderBoarData: [],
   };
 
+  /** Make POST call **/
   response.submitResponse = await fetch('https://klikuj.herokuapp.com/api/v1/klik', {
     method: 'POST',
     headers: {
@@ -34,6 +43,7 @@ export const submitClick = async (teamName: string | undefined, session: string)
     body: JSON.stringify(dataToSend),
   }).then((res) => res.json());
 
+  /** Load leader board data **/
   response.leaderBoarData = await loadLeaderBoard();
 
   return response;

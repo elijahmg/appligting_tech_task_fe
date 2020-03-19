@@ -5,6 +5,10 @@ import { TextField } from '../TextField';
 
 import styles from './styles.scss';
 
+/**
+ * Team info component
+ * @constructor
+ */
 export const TeamInfo: FC = () => {
   const { teamName } = useParams();
   const link = window.location.href;

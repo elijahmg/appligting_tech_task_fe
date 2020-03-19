@@ -13,6 +13,11 @@ type Props = {
   data: Array<LeaderBoardData>,
 }
 
+/**
+ * Table component
+ * @param {Array<LeaderBoardData>>} data
+ * @constructor
+ */
 export const Table: FC<Props> = ({ data }) => {
   console.log(data);
   return (
