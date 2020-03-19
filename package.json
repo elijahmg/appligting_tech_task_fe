@@ -45,6 +45,7 @@
   },
   "scripts": {
     "dev": "webpack-dev-server --config webpack.common.js --progress --color",
-    "build": "webpack --config webpack.common.js"
+    "build": "webpack --config webpack.common.js",
+    "start": "node /build/bundle.js"
   }
 }
