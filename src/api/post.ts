@@ -2,12 +2,12 @@ import { loadLeaderBoard } from './get';
 
 import { LeaderBoardData } from '../components/Table';
 
-type PostType = {
+export type PostType = {
   your_clicks: number,
   team_clicks: number,
 }
 
-interface Response {
+export interface Response {
   submitResponse: PostType,
   leaderBoarData: Array<LeaderBoardData>
 }

@@ -1,0 +1,17 @@
+.infoWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-style: normal;
+  color: #5f5f5f;
+  font-weight: 500;
+  font-size: 18px;
+  text-transform: uppercase;
+  margin: 10px 0;
+
+  .clicks {
+    font-size: 24px;
+    color: #3e7cc3;
+  }
+}

@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 export const loadLeaderBoard = async () => {
   return await fetch('https://klikuj.herokuapp.com/api/v1/leaderboard', { method: 'GET' })
     .then((res) => res.json());

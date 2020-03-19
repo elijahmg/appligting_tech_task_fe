@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
 
-import './styles.scss';
+import styles from './styles.scss';
+import ts from 'typescript/lib/tsserverlibrary';
+import convertScriptKindName = ts.server.convertScriptKindName;
 
 export interface LeaderBoardData {
   order: number,
   team: string,
   clicks: string
+  active?: boolean,
 }
 
 type Props = {
@@ -13,6 +16,7 @@ type Props = {
 }
 
 export const Table: FC<Props> = ({ data }) => {
+  console.log(data);
   return (
     <table>
       <thead>
@@ -24,7 +28,7 @@ export const Table: FC<Props> = ({ data }) => {
       </thead>
       <tbody>
       {data.map((obj, index) => (
-        <tr key={index}>
+        <tr key={index} className={obj.active ? styles.active : ''}>
           <td>{obj.order}</td>
           <td>{obj.team}</td>
           <td>{obj.clicks}</td>
