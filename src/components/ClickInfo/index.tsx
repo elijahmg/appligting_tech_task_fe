@@ -10,7 +10,7 @@ type InfoProps = {
 }
 
 export const ClickInfo: FC<PostType> = ({ your_clicks, team_clicks }) => (
-  <div>
+  <div className={styles.clickInfo}>
     <Info clickNumber={your_clicks}/>
     <Info clickNumber={team_clicks} isTeamClick/>
   </div>

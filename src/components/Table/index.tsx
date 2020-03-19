@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
 
 import styles from './styles.scss';
-import ts from 'typescript/lib/tsserverlibrary';
-import convertScriptKindName = ts.server.convertScriptKindName;
 
 export interface LeaderBoardData {
   order: number,

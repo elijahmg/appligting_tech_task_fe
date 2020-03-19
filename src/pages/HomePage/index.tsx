@@ -6,6 +6,8 @@ import { findIndex } from 'lodash';
 import { loadLeaderBoard } from '../../api/get';
 import { submitClick, Response } from '../../api/post';
 
+import { formatNumber } from '../../functions/utils';
+
 import { initializeSession } from '../../store/actions/session';
 import { Session } from '../../store/types/session';
 
@@ -45,7 +47,10 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
   useEffect(() => {
     const loadData = async () => {
       const leaderBoardData = await loadLeaderBoard();
-      setLeaderBoardData(leaderBoardData.slice(0, 10));
+      setLeaderBoardData(
+        leaderBoardData.slice(0, 10)
+          .map((obj: LeaderBoardData) => ({ ...obj, clicks: formatNumber(obj.clicks)})),
+        );
     };
 
     setSession();
@@ -71,6 +76,7 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
         data = response.leaderBoarData.slice(teamIndex - 5, teamIndex + 4);
       }
 
+      data = data.map((obj) => ({ ...obj, clicks: formatNumber(obj.clicks) }));
 
       setLeaderBoardData(data);
       setResponse(response);
@@ -84,8 +90,6 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
 
     await initialClick();
   };
-
-  console.log('session', session);
 
   return (
     <div>
@@ -122,6 +126,9 @@ const HomePage: FC<Props> = ({ setSession, session }) => {
         </div>
         {leaderBoardData.length === 0 && <Loading/>}
         {leaderBoardData.length > 0 && <Table data={leaderBoardData}/>}
+        <div className={styles.footerTableMessage}>
+          <span>Want to be top? STFU and click</span>
+        </div>
       </Container>
       <footer>
         If you don't like this page, it's <a href="https://applifting.cz">Applifting</a>'s fault
